@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>lr9</title>
+
+  <script>
+      method_url= location.protocol + "//" + location.host + "/index/view.json"
+
+      function send_query() {
+          const frm = document.forms.my_form;
+          const param_str = "?" + "v1=" + frm.v1.value;
+          if (param_str === "") return false;
+          let my_JSON_object = {};
+          const http_request = new XMLHttpRequest();
+          http_request.open("GET", method_url+param_str, true);
+          http_request.onreadystatechange = function () {
+              const done = 4, ok = 200;
+              if (http_request.readyState === done && http_request.status === ok) {
+                  my_JSON_object = JSON.parse(http_request.responseText);
+                  show_result(my_JSON_object);
+              }
+          };
+          http_request.send(null);
+          return false;
+      }
+
+      function show_result(data) {
+          var result = document.getElementById("result");
+          var count = document.getElementById("count");
+          console.log(typeof result)
+          if (data.value_result === null){
+              count.innerHTML="";
+              result.innerHTML = "<hr/>Введенные данные некорректны!<hr/>";
+          }
+          else {
+              result.innerHTML = "<hr/>Результат: " + data.value_result + " ";
+              count.innerHTML = "<hr/>Количество чисел Армстронга: " + data.value_count + "<br/>";
+
+          }
+      }
+
+  </script>
+</head>
+<body>
+<h2>
+  Число из n цифр является числом Армстронга, если сумма цифр этого числа, возведенных в степень n равна самому этому числу. Например: 153 = 1 + 125 + 27. Написать программу, определяющую все числа Арм- стронга, состоящие из n цифр (n вводится с клавиатуры). Вывести на печать сами числа их количество.
+</h2>
+<h3>Введите число, чтобы найти числа армстронга</h3>
+<form action="/index/view" accept-charset="UTF-8" method="get" name="my_form" >
+  <label for = 'v1'>Число: </label>
+  <input type="text" name="v1" id="v1" />
+  <br><br>
+  <input type = "submit" name = "commit" value = "Отправить" onclick="return send_query();"/>
+</form>
+<div id="result"></div>
+<div id="count"></div>

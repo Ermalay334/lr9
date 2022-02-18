@@ -1,0 +1,22 @@
+<style>
+    table.iksweb{text-decoration: none;border-collapse:collapse;width:auto;text-align:center;}
+    table.iksweb th{font-weight:500;font-size:18px; color:#ffffff;background-color:#354251;}
+    table.iksweb td{font-size:15px;color:#354251;}
+    table.iksweb td,table.iksweb th{white-space:pre-wrap;padding:19px 14px;line-height:15px;vertical-align: middle;border: 1px solid #354251;}	table.iksweb tr:hover{background-color:#f9fafb}
+    table.iksweb tr:hover td{color:#354251;cursor:default;}
+</style>
+<h1>В числах состоящих из <%=@n %> цифр найдено <%=@counter %> чисел армстронга!</h1>
+
+
+<p id="result">
+<table>
+  <tr>
+    <td>Результат: </td>
+  </tr>
+  <tr>
+    <td>
+      &nbsp;&nbsp; <%= @result%>
+    </td>
+  </tr>
+</table><br/>
+</p>
